@@ -11,8 +11,82 @@
     <title>Weather Dashboard</title>
 </head>
 <body>
-    <h1><span class="title badge text-light bg-secondary">Weather Dashboard!</span></h1>
+    <header class="row">
+        <div class="col-12 text-light bg-dark d-flex justify-content-center">
+            <h1 class="display-3">Weather Dashboard</h1>
+        </div>
+    </header>
 
+    <main class="container-fluid">
+        <div class="row">
+            <div class="col-2 bg-light border">
+                <label for="search-bar" class="my-1">Search for a City: </label>
+                <form class="input-group mb-3">
+                    <input id="search-bar" type="text" name="search-bar" class="form-control" aria-label="search-bar" placeholder="City Name"></input>
+                    <button id="search-button" type="button" class="btn bg-primary btn-outline-light" >Search</button>
+                </form>
+
+                <div id="search-history" class="buttonst-group mb-3">
+                    <button class="list-group-item list-group-item-action">Toronto</button>
+                    <button class="list-group-item list-group-item-action">Toronto</button>
+                    <button class="list-group-item list-group-item-action">Toronto</button>
+                    <button class="list-group-item list-group-item-action">Toronto</button>
+                    <button class="list-group-item list-group-item-action">Toronto</button>
+                </div>
+            </div>
+
+            <div class="col-10">
+                <div class="row my-3">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title display-4">Current Forecast</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <h2 class="col-12 display-4">5-Day Forecast</h2>
+                    <div class="col">
+                        <div class="card bg-primary">
+                            <div class="card-body">
+                                <h5 class="card-title">Forcast</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card bg-primary">
+                            <div class="card-body">
+                                <h5 class="card-title">Forcast</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card bg-primary">
+                            <div class="card-body">
+                                <h5 class="card-title">Forcast</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card bg-primary">
+                            <div class="card-body">
+                                <h5 class="card-title">Forcast</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card bg-primary">
+                            <div class="card-body">
+                                <h5 class="card-title">Forcast</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
