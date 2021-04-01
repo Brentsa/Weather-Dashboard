@@ -1,3 +1,4 @@
+var forecastContainerEl = $("#forecast");
 
 //Init an array to contain the city search history
 var searchHistory = [];
@@ -69,10 +70,15 @@ function searchCityByLonLat(longitude, latitude, City){
 //Display current weather conditions
 function displayCurrentWeather(name, date, icon, temp, humidity, windSpeed, uv){
 
+    console.log("called");
+    var currentContainter = $("<div>").addClass("row my-3").html("<div class='col-12'><div class='card'><div class='card-body'><h2 class='card-title display-4'>Current Forecast</h2></div></div></div>");
+    currentContainter.appendTo(forecastContainerEl);
 }
 
-function displayCurrentWeather(date, icon, temp, humidity, windSpeed){
-    
+function displayFutureWeather(date, icon, temp, humidity, windSpeed){
+    console.log("called");
+    var futureContainter = $("<div>").addClass("row my-3").html("<div class='row'><h2 class='col-12 display-4'>5-Day Forecast</h2><div class='col'><div class='card bg-primary'><div class='card-body'><h5 class='card-title'>Forcast</h5></div></div></div><div class='col'><div class='card bg-primary'><div class='card-body'><h5 class='card-title'>Forcast</h5></div></div></div><div class='col'><div class='card bg-primary'><div class='card-body'><h5 class='card-title'>Forcast</h5></div></div></div><div class='col'><div class='card bg-primary'><div class='card-body'><h5 class='card-title'>Forcast</h5></div></div></div><div class='col'><div class='card bg-primary'><div class='card-body'><h5 class='card-title'>Forcast</h5></div></div></div></div>");
+    futureContainter.appendTo(forecastContainerEl);
 }
 
 //When checking the UV change color based on favorable, moderate, or severe conditions
@@ -82,3 +88,6 @@ function displayCurrentWeather(date, icon, temp, humidity, windSpeed){
 //Open the current and future conditions when clicking on search history
 
 searchCityByName("Oakville");
+
+displayCurrentWeather(1,1,1,1,1,1,1);
+displayFutureWeather(1,1,1,1,1);
