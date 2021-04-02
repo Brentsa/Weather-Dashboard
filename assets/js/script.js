@@ -149,10 +149,43 @@ function addCityToHistory(city){
     //If the value was searched save it to the history otherwise do not save it to search history
     if(bSaveSearch){
         $("<button>").addClass("list-group-item list-group-item-action").text(city).appendTo($("#search-history"));
+
+        //Add the city to our search array to be saved.
+        searchHistory.push(city);
+        saveHistory();
     }
     
     //Return the switch to true so that new searches will be saved
     bSaveSearch = true;
+}
+
+function initCityHistory(cityArray){
+
+    //If the value was searched save it to the history otherwise do not save it to search history
+    for(var i = 0; i < cityArray.length; i++){
+        $("<button>").addClass("list-group-item list-group-item-action").text(cityArray[i]).appendTo($("#search-history"));
+    }
+}
+
+function saveHistory(){
+    //Save our search history array to local storage
+    localStorage.setItem("history", JSON.stringify(searchHistory));
+}
+
+function loadHistory(){
+    //Retrieve our save history from local storage
+    var savedHistory = JSON.parse(localStorage.getItem("history"));
+
+    //If there is history set our history array otherwise reset our search array
+    if(savedHistory){
+        searchHistory = savedHistory;
+    }
+    else{
+        searchHistory = [];
+    }
+
+    //Build the search history html for each saved city in the array
+    initCityHistory(searchHistory);
 }
 
 //Take the user city search input and display weather conditions
@@ -161,4 +194,4 @@ $("#search-button").on("click", handleUserSearch);
 //Open the current and future conditions when clicking on search history
 $("#search-history").on("click", "button", handleSearchHistory);
 
-
+loadHistory();
