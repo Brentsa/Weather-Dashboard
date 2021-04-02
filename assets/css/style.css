@@ -15,5 +15,5 @@
 }
 
 .header-background{
-    background: linear-gradient(0.25turn,yellow, lightblue, blue, darkblue);
+    background: linear-gradient(0.25turn, yellow 5%, lightblue 25%, blue 60%, darkblue 100%);
 }

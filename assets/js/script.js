@@ -76,8 +76,9 @@ function displayCurrentWeather(data, cityName){
     addCityToHistory(city);
 
     //Dynamically create the html that displays the key weather metrics
-    var currentContainter = $("<div>").addClass("row my-3 font-bold").html("<div class='col-12'><div class='card'><div class='card-body'><h2 class='card-title title-header'></h2></div></div></div>");
-    currentContainter.find(".card-title").html(city + " - " + date + " <img src='http://openweathermap.org/img/wn/"+ icon +"@4x.png'></img>");
+    var currentContainter = $("<div>").addClass("row my-3 font-bold").html("<div class='col-12'><div class='card'><div class='row'><div class='col-8'><div class='card-body'><h2 class='card-title title-header'></h2></div></div><div class='col-4'></div></div></div></div>");
+    currentContainter.find(".card-title").html(city + "  (" + date + ")"); //+ " <img src='http://openweathermap.org/img/wn/"+ icon +"@4x.png'></img>");
+    currentContainter.find(".col-4").html("<img src='http://openweathermap.org/img/wn/"+ icon +"@4x.png' width=50%></img>");
     $("<p>").text("Temperature: " + temperature + " C").appendTo(currentContainter.find(".card-body"));
     $("<p>").text("Wind Speed: " + windSpeed + " Km/h").appendTo(currentContainter.find(".card-body"));
     $("<p>").text("Humidity: " + humidity + " %").appendTo(currentContainter.find(".card-body"));
@@ -121,6 +122,7 @@ function displayFutureWeather(data){
 
 //Called when the user clicks the search button
 function handleUserSearch(event){
+    event.preventDefault();
 
     //Initialize a variable with the queried city name and then delete from the search box
     var cityName = $("#search-bar").val().trim();
@@ -147,7 +149,7 @@ function addCityToHistory(city){
 
     //If the value was searched save it to the history otherwise do not save it to search history
     if(bSaveSearch){
-        $("<button>").addClass("list-group-item list-group-item-action").text(city).prependTo($("#search-history"));
+        $("<button>").addClass("list-group-item list-group-item-action overflow-hidden").text(city).prependTo($("#search-history"));
 
         //Add the city to our search array to be saved.
         searchHistory.push(city);
@@ -165,14 +167,14 @@ function initCityHistory(cityArray){
 
     //If the value was searched save it to the history otherwise do not save it to search history
     for(var i = 0; i < cityArray.length; i++){
-        $("<button>").addClass("list-group-item list-group-item-action").text(cityArray[i]).prependTo($("#search-history"));
+        $("<button>").addClass("list-group-item list-group-item-action overflow-hidden").text(cityArray[i]).prependTo($("#search-history"));
     }
 }
 
 //Change color of the UV
 function modifyUVColor(uviContainer, uvIndex){
 
-    //Change the color of the UVI container depending on the UVI
+    //Change the color of the UVI container depending on the UV index value
     if(uvIndex <= 3){
         uviContainer.find("span").addClass("bg-success");
     }
@@ -222,5 +224,13 @@ $("#search-history").on("click", "button", handleSearchHistory);
 
 //Resets the user's search history
 $("#reset-btn").on("click", resetHistory)
+
+//Disable enter key
+$(document).keypress(
+    function(event){
+      if (event.which == '13') {
+        event.preventDefault();
+      }
+  });
 
 loadHistory();
