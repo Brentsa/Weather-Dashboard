@@ -1,3 +1,4 @@
+//Init our city forecast container
 var forecastContainerEl = $("#forecast");
 
 //Init an array to contain the city search history
@@ -37,8 +38,7 @@ function searchCityByLonLat(longitude, latitude, city){
 
                 console.log(data);
 
-                displayCurrentWeather(data, city);
-                displayFutureWeather(data);
+                displayWeather(data, city);
             });
         }
         else{
@@ -48,6 +48,15 @@ function searchCityByLonLat(longitude, latitude, city){
         alert("Error: Cannot connect to the server");
     });
 
+}
+
+//Display both current and future weather
+function displayWeather(data, cityName){
+
+    //Clear any prior weather data and display new search data
+    forecastContainerEl.html("");
+    displayCurrentWeather(data, cityName);
+    displayFutureWeather(data);
 }
 
 //Display current weather conditions
@@ -67,6 +76,8 @@ function displayCurrentWeather(data, cityName){
     $("<p>").text("Temperature: " + temperature + " C").appendTo(currentContainter.find(".card-body"));
     $("<p>").text("Wind Speed: " + windSpeed + " Km/h").appendTo(currentContainter.find(".card-body"));
     $("<p>").text("Humidity: " + humidity + " %").appendTo(currentContainter.find(".card-body"));
+
+    //When checking the UV change color based on favorable, moderate, or severe conditions
     $("<p>").text("UV Index: " + uvi).appendTo(currentContainter.find(".card-body"));
 
     currentContainter.appendTo(forecastContainerEl);
@@ -99,10 +110,18 @@ function displayFutureWeather(data){
     futureContainter.appendTo(forecastContainerEl);    
 }
 
-//When checking the UV change color based on favorable, moderate, or severe conditions
+//Called when the user clicks the search button
+function handleUserSearch(event){
+    var cityName = $("#search-bar").val().trim();
+    searchCityByName(cityName);
+    $("#search-bar").val("");
+}
+
+//Take the user city search input and display weather conditions
+$("#search-button").on("click", handleUserSearch);
 
 //Add city to search history
 
 //Open the current and future conditions when clicking on search history
 
-searchCityByName("Oakville");
+
