@@ -76,8 +76,8 @@ function displayCurrentWeather(data, cityName){
     addCityToHistory(city);
 
     //Dynamically create the html that displays the key weather metrics
-    var currentContainter = $("<div>").addClass("row my-3").html("<div class='col-12'><div class='card'><div class='card-body'><h2 class='card-title display-4'></h2></div></div></div>");
-    currentContainter.find(".card-title").html(city + " " + date + " <img src='http://openweathermap.org/img/wn/"+ icon +"@4x.png'></img>");
+    var currentContainter = $("<div>").addClass("row my-3 font-bold").html("<div class='col-12'><div class='card'><div class='card-body'><h2 class='card-title title-header'></h2></div></div></div>");
+    currentContainter.find(".card-title").html(city + " - " + date + " <img src='http://openweathermap.org/img/wn/"+ icon +"@4x.png'></img>");
     $("<p>").text("Temperature: " + temperature + " C").appendTo(currentContainter.find(".card-body"));
     $("<p>").text("Wind Speed: " + windSpeed + " Km/h").appendTo(currentContainter.find(".card-body"));
     $("<p>").text("Humidity: " + humidity + " %").appendTo(currentContainter.find(".card-body"));
@@ -93,7 +93,7 @@ function displayCurrentWeather(data, cityName){
 function displayFutureWeather(data){
 
     //Create a container to hold all of the 5 day forecast cards
-    var futureContainter = $("<div>").addClass("row").html("<h2 class='col-12 display-4'>5-Day Forecast</h2>");
+    var futureContainter = $("<div>").addClass("row").html("<h2 class='col-12 title-header'>5-Day Forecast</h2>");
 
     for(var day = 1; day < 6; day++){
         //Initialize all the weather variables
@@ -104,7 +104,7 @@ function displayFutureWeather(data){
         var fIcon = data.daily[day].weather[0].icon;
 
         //Dynamically create the html that displays the key weather metrics
-        var forecastBox = $("<div>").addClass("col-auto").html("<div class='card bg-primary'><div class='card-body'></div></div>");
+        var forecastBox = $("<div>").addClass("col-auto mb-3").html("<div class='card bg-dark-blue'><div class='card-body'></div></div>");
 
         $("<h3>").addClass("card-title").text(fDate).appendTo($(forecastBox).find(".card-body"));
         $("<img>").attr("src", "http://openweathermap.org/img/wn/"+ fIcon +"@2x.png").appendTo($(forecastBox).find(".card-body"));

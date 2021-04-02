@@ -1,0 +1,19 @@
+.bg-dark-blue{
+    background-color: rgb(31, 31, 107);
+    color: beige;
+}
+
+.font-bold{
+    color: black;
+    font-size: 24px;
+}
+
+.title-header{
+    color: black;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.header-background{
+    background: linear-gradient(0.25turn,yellow, lightblue, blue, darkblue);
+}
