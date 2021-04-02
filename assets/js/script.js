@@ -83,7 +83,8 @@ function displayCurrentWeather(data, cityName){
     $("<p>").text("Humidity: " + humidity + " %").appendTo(currentContainter.find(".card-body"));
 
     //When checking the UV change color based on favorable, moderate, or severe conditions
-    $("<p>").text("UV Index: " + uvi).appendTo(currentContainter.find(".card-body"));
+    var uviData = $("<p>").html("UV Index: <span class='py-1 px-3 rounded'>" + uvi + "</span>").appendTo(currentContainter.find(".card-body"));
+    modifyUVColor(uviData, uvi);
 
     currentContainter.appendTo(forecastContainerEl);
 }
@@ -157,6 +158,7 @@ function addCityToHistory(city){
     bSaveSearch = true;
 }
 
+//Draw the search history to the screen
 function initCityHistory(cityArray){
 
     $("#search-history").html("");
@@ -164,6 +166,21 @@ function initCityHistory(cityArray){
     //If the value was searched save it to the history otherwise do not save it to search history
     for(var i = 0; i < cityArray.length; i++){
         $("<button>").addClass("list-group-item list-group-item-action").text(cityArray[i]).prependTo($("#search-history"));
+    }
+}
+
+//Change color of the UV
+function modifyUVColor(uviContainer, uvIndex){
+
+    //Change the color of the UVI container depending on the UVI
+    if(uvIndex <= 3){
+        uviContainer.find("span").addClass("bg-success");
+    }
+    else if(uvIndex <= 5){
+        uviContainer.find("span").addClass("bg-warning");
+    }
+    else{
+        uviContainer.find("span").addClass("bg-danger");
     }
 }
 
