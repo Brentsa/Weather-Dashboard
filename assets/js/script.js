@@ -96,7 +96,7 @@ function displayFutureWeather(data){
         var fIcon = data.daily[day].weather[0].icon;
         console.log(fDate, fTemp, fHumidity, fWindSpeed, fIcon);
 
-        var forecastBox = $("<div>").addClass("col").html("<div class='card bg-primary'><div class='card-body'></div></div>");
+        var forecastBox = $("<div>").addClass("col-auto").html("<div class='card bg-primary'><div class='card-body'></div></div>");
 
         $("<h3>").addClass("card-title").text(fDate).appendTo($(forecastBox).find(".card-body"));
         $("<img>").attr("src", "http://openweathermap.org/img/wn/"+ fIcon +"@2x.png").appendTo($(forecastBox).find(".card-body"));
@@ -121,6 +121,9 @@ function handleUserSearch(event){
 $("#search-button").on("click", handleUserSearch);
 
 //Add city to search history
+function addCityToHistory(city){
+
+}
 
 //Open the current and future conditions when clicking on search history
 
