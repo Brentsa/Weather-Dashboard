@@ -71,7 +71,6 @@ function displayCurrentWeather(data, cityName){
     var windSpeed = data.current.wind_speed; 
     var icon = data.current.weather[0].icon;
     var uvi = data.current.uvi;
-    console.log(city, date, temperature, humidity, windSpeed, icon, uvi);
 
     //Add the city to the search history
     addCityToHistory(city);
@@ -102,7 +101,6 @@ function displayFutureWeather(data){
         var fHumidity = data.daily[day].humidity;
         var fWindSpeed = data.daily[day].wind_speed;
         var fIcon = data.daily[day].weather[0].icon;
-        console.log(fDate, fTemp, fHumidity, fWindSpeed, fIcon);
 
         //Dynamically create the html that displays the key weather metrics
         var forecastBox = $("<div>").addClass("col-auto").html("<div class='card bg-primary'><div class='card-body'></div></div>");
@@ -148,7 +146,7 @@ function addCityToHistory(city){
 
     //If the value was searched save it to the history otherwise do not save it to search history
     if(bSaveSearch){
-        $("<button>").addClass("list-group-item list-group-item-action").text(city).appendTo($("#search-history"));
+        $("<button>").addClass("list-group-item list-group-item-action").text(city).prependTo($("#search-history"));
 
         //Add the city to our search array to be saved.
         searchHistory.push(city);
@@ -161,17 +159,21 @@ function addCityToHistory(city){
 
 function initCityHistory(cityArray){
 
+    $("#search-history").html("");
+
     //If the value was searched save it to the history otherwise do not save it to search history
     for(var i = 0; i < cityArray.length; i++){
-        $("<button>").addClass("list-group-item list-group-item-action").text(cityArray[i]).appendTo($("#search-history"));
+        $("<button>").addClass("list-group-item list-group-item-action").text(cityArray[i]).prependTo($("#search-history"));
     }
 }
 
+//Save the search history
 function saveHistory(){
     //Save our search history array to local storage
     localStorage.setItem("history", JSON.stringify(searchHistory));
 }
 
+//Load and display prior search history
 function loadHistory(){
     //Retrieve our save history from local storage
     var savedHistory = JSON.parse(localStorage.getItem("history"));
@@ -188,10 +190,20 @@ function loadHistory(){
     initCityHistory(searchHistory);
 }
 
+//resets the search history and clears the on screen history
+function resetHistory(event){
+    searchHistory = [];
+    saveHistory();
+    loadHistory();
+}
+
 //Take the user city search input and display weather conditions
 $("#search-button").on("click", handleUserSearch);
 
 //Open the current and future conditions when clicking on search history
 $("#search-history").on("click", "button", handleSearchHistory);
+
+//Resets the user's search history
+$("#reset-btn").on("click", resetHistory)
 
 loadHistory();
